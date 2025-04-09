@@ -1,0 +1,38 @@
+meta {
+  name: POST GokbSource
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{PushKBURL}}/sources/gokbsource
+  body: json
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: client_credentials
+  access_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: {{KeycloakPostmanClientId}}
+  client_secret: {{KeycloakPostmanClientSecret}}
+  scope: 
+  credentials_placement: basic_auth_header
+  credentials_id: 
+  token_placement: header
+  token_header_prefix: 
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+body:json {
+  {
+      "gokb": {
+          "id": "63a3ec92-f93a-5278-aaab-f9ca4759b45d",
+          "baseUrl": "https://ethan-1.com",
+          "name": "Extra gokb with ethan"
+      },
+      "gokbSourceType": "TIPP",
+      "name": "Testing gokbPush 1"
+  }
+}

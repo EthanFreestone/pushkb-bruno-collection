@@ -1,0 +1,42 @@
+meta {
+  name: External Services
+}
+
+auth {
+  mode: oauth2
+}
+
+auth:oauth2 {
+  grant_type: client_credentials
+  access_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: {{KeycloakClientId}}
+  client_secret: {{KeycloakClientSecret}}
+  scope: 
+  credentials_placement: basic_auth_header
+  credentials_id: KeycloakToken
+  token_placement: header
+  token_header_prefix: Bearer
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+script:pre-request {
+  const hostURL = bru.getEnvVar("HostURL");
+  const keycloakPort = bru.getEnvVar("KeycloakPort");
+  const pushKbPort = bru.getEnvVar("PushKBPort");
+  
+  bru.setEnvVar("KeycloakURL", `${hostURL}:${keycloakPort}`);
+  bru.setEnvVar("PushKBURL", `${hostURL}:${pushKbPort}`);
+  
+  
+  // Find keycloak secrets in client/secret in admin screen
+  // Then manually set var KeycloakClientSecret
+  bru.setEnvVar("KeycloakClientId", "postman");
+  // Trialling pushKB client instead
+  // bru.setEnvVar("KeycloakClientId", "pushKB")
+  
+  // This is not meant to be a secure user password so I don't mind it being here
+  bru.setEnvVar("KeycloakUser", "superuser");
+  bru.setEnvVar("KeycloakUserPassword", "superuser");
+}

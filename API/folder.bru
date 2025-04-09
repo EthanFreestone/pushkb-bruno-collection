@@ -1,0 +1,43 @@
+meta {
+  name: API
+}
+
+auth {
+  mode: none
+}
+
+script:pre-request {
+  /*const keycloakURL = bru.getEnvVar("KeycloakURL");
+  const clientId = bru.getEnvVar("client_id");
+  const clientSecret = bru.getEnvVar("client_secret");
+  
+  const loginURL = `${keycloakURL}/realms/master/protocol/openid-connect/token`;
+  
+  const loginRequest = {
+      //url: `${baseUrl}/authn/login`,
+      url: loginURL,
+      method: 'POST',
+      header: {
+          'Accept': '* /*', // Might need fixing
+          'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: {
+          mode: 'urlencoded',
+          urlencoded : [
+              { key: 'grant_type', value: 'password'},
+              { key: 'username', value: 'admin'},
+              { key: 'password', value: 'admin'},
+              { key: 'client_id', value: clientId},
+              { key: 'client_secret', value: clientSecret},
+          ]
+      }
+  };
+  
+  // pm.sendRequest(loginRequest, function (err, res) {
+      const result = res.json();
+      bru.setEnvVar("accessToken", result.access_token);
+      console.log("ACCESS TOKEN: %o", result.access_token)
+  });
+  */
+  // //pm.request.headers.upsert({key: 'x-okapi-token', value: bru.getEnvVar('x-okapi-token-value') })
+}

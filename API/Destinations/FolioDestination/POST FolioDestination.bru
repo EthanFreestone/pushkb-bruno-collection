@@ -1,0 +1,30 @@
+meta {
+  name: POST FolioDestination
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{PushKBURL}}/destinations/foliodestination
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "destinationType": "PACKAGE",
+      //"destinationType": "PCI",
+      //"destinationType": "WIBBLE",
+      "folioTenant": {
+          "id": "e0aecbc2-a11d-58d3-a88b-e368878052a6",
+          "baseUrl": "https://testing.com",
+          "loginUser": "testuser",
+          "loginPassword": "testpass",
+          "tenant": "test1",
+          "authType": "OKAPI",
+          "name": "test-tenant"
+      },
+      "name": "Test FOLIO Destination API"
+      //"name": "API test TIPP"
+  }
+}

@@ -1,0 +1,17 @@
+meta {
+  name: Unseal
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8200/v1/sys/unseal
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "key": {{VaultKey}}
+  }
+}

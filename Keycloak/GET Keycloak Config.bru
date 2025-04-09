@@ -1,0 +1,11 @@
+meta {
+  name: GET Keycloak Config
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{KeycloakURL}}/realms/PushKB/.well-known/openid-configuration
+  body: none
+  auth: none
+}

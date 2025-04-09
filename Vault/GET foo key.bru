@@ -1,0 +1,15 @@
+meta {
+  name: GET foo key
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8200/v1/secret/data/foo
+  body: none
+  auth: none
+}
+
+headers {
+  X-Vault-Token: {{XVaultToken}}
+}

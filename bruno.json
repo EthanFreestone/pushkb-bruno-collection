@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "PushKB Collection",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

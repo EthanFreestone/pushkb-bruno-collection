@@ -1,0 +1,32 @@
+meta {
+  name: GET SourceRecord Count
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{PushKBURL}}/sourcerecords/count?sourceId=4f4727ee-cabf-58ca-89e7-784b93f05633
+  body: json
+  auth: oauth2
+}
+
+params:query {
+  sourceId: 4f4727ee-cabf-58ca-89e7-784b93f05633
+  ~sourceId: 7fa0c381-2ba8-5fee-b6f4-0e6d00604025
+  ~filterContext: 40abede4-73c1-45e4-8edf-8e0ffbf312ac
+}
+
+auth:oauth2 {
+  grant_type: client_credentials
+  access_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: {{KeycloakPostmanClientId}}
+  client_secret: {{KeycloakPostmanClientSecret}}
+  scope: 
+  credentials_placement: basic_auth_header
+  credentials_id: 
+  token_placement: header
+  token_header_prefix: 
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
