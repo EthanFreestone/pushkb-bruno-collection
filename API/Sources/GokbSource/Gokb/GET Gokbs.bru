@@ -7,20 +7,5 @@ meta {
 get {
   url: {{PushKBURL}}/sources/gokbsource/gokb
   body: none
-  auth: oauth2
-}
-
-auth:oauth2 {
-  grant_type: client_credentials
-  access_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
-  refresh_token_url: 
-  client_id: {{KeycloakPostmanClientId}}
-  client_secret: {{KeycloakPostmanClientSecret}}
-  scope: 
-  credentials_placement: basic_auth_header
-  credentials_id: 
-  token_placement: header
-  token_header_prefix: 
-  auto_fetch_token: true
-  auto_refresh_token: false
+  auth: inherit
 }
