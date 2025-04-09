@@ -9,7 +9,7 @@ auth {
 auth:oauth2 {
   grant_type: client_credentials
   access_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
-  refresh_token_url: 
+  refresh_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
   client_id: {{KeycloakClientId}}
   client_secret: {{KeycloakClientSecret}}
   scope: 
@@ -18,7 +18,7 @@ auth:oauth2 {
   token_placement: header
   token_header_prefix: Bearer
   auto_fetch_token: true
-  auto_refresh_token: false
+  auto_refresh_token: true
 }
 
 script:pre-request {
