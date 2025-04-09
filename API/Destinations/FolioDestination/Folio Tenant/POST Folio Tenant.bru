@@ -11,12 +11,19 @@ post {
 }
 
 body:json {
+  // {
+  //     "baseUrl": "https://testing.com",
+  //     "loginUser": "testuser",
+  //     "loginPassword": "testpass",
+  //     "tenant": "test1",
+  //     "authType": "OKAPI",
+  //     "name": "test-tenant"
+  // }
+  
   {
-      "baseUrl": "https://testing.com",
-      "loginUser": "testuser",
-      "loginPassword": "testpass",
-      "tenant": "test1",
-      "authType": "OKAPI",
-      "name": "test-tenant"
+    "baseUrl": "http://127.0.0.1:8080",
+    "tenant": "test1",
+    "name": "DC",
+    "authType": "NONE"
   }
 }

@@ -5,13 +5,13 @@ meta {
 }
 
 get {
-  url: {{PushKBURL}}/sourcerecords/count?sourceId=4f4727ee-cabf-58ca-89e7-784b93f05633
+  url: {{PushKBURL}}/sourcerecords/count
   body: json
   auth: inherit
 }
 
 params:query {
-  sourceId: 4f4727ee-cabf-58ca-89e7-784b93f05633
+  ~sourceId: 4f4727ee-cabf-58ca-89e7-784b93f05633
   ~sourceId: 7fa0c381-2ba8-5fee-b6f4-0e6d00604025
   ~filterContext: 40abede4-73c1-45e4-8edf-8e0ffbf312ac
 }
