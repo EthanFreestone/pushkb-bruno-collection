@@ -1,5 +1,6 @@
 meta {
   name: External Services
+  seq: 1
 }
 
 auth {
@@ -32,9 +33,9 @@ script:pre-request {
   
   // Find keycloak secrets in client/secret in admin screen
   // Then manually set var KeycloakClientSecret
-  bru.setEnvVar("KeycloakClientId", "postman");
+  //bru.setEnvVar("KeycloakClientId", "postman");
   // Trialling pushKB client instead
-  // bru.setEnvVar("KeycloakClientId", "pushKB")
+  bru.setEnvVar("KeycloakClientId", "apiClient")
   
   // This is not meant to be a secure user password so I don't mind it being here
   bru.setEnvVar("KeycloakUser", "superuser");
