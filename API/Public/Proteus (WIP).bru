@@ -12,233 +12,253 @@ post {
 
 body:json {
   {
-      "schema":{
-    "header": {
-      "lifecycleStatus": "$.status",
-      "availability": {
-        "type": "general"
-      },
-      "packageProvider": {
-  			"#type": "require",
-  			"require": "$.[?(@.providerName != '')]",
-  			"value": {
-  				"name": "$.providerName"
-  			}
-  		},
-      "packageSource": "GOKb",
-      "packageName": "$.name",
-      "packageSlug": "$.uuid",
-      "sourceDataCreated": "$.dateCreated",
-      "sourceDataUpdated": "$.lastUpdatedDisplay",
-      "sourceTitleCount": "$.titleCount",
-      "availabilityScope": {
-        "#type": "string_to_case",
-        "value": "$.global",
-        "case": "LOWER_SNAKE"
-      },
-      "availabilityConstraints": {
-        "#type": "fallback",
-        "strategies": [
-          {
-            "#type": "require",
-            "require": "$.[?(@.global == 'Regional' || @.global == 'Consortium')]",
-            "value": {
-              "#type": "require",
-              "require": "$.globalNote",
-              "value": {
-  							"#type": "require",
-  							"require": "$.[?(@.globalNote != '')]",
-  							"value": [
-  								{
-  									"body": "$.globalNote"
-  								}
-  							]
-  						}
-            }
-          },
-          {
-            "#type": "require",
-            "require": "$.[?(@.global == 'Local')]",
-            "value": {
-              "#type": "for_each",
-              "values": "$.curatoryGroups[?(@ empty false)]",
-              "spec": {
-                "body": "$"
-              }
-            }
-          },
-          []
-        ]
-      },
-      "contentTypes": {
-        "#type": "require",
-        "require": "$.[?(@.contentType empty false)]",
-        "value": [
-          {
-            "contentType": "$.contentType"
-          }
-        ]
-      },
-      "alternateResourceNames": {
+    "schema": {
+      "pushableId": "$.pushableId",
+      "pushKbUrl": "$.pushKbUrl",
+      "sessionId": "$.sessionId",
+      "chunkId": "$.chunkId",
+      "records": {
         "#type": "for_each",
-        "values": "$.altname[?(@ empty false)]",
+        "values": "$.records",
         "spec": {
-          "name": "$"
-        }
-      },
-      "alternateSlugs": [
-        {
-          "#type": "require",
-          "require": "$.shortcode",
-          "value": {
-            "slug": "$.shortcode"
-          }
-        }
-      ],
-      "packageDescriptionUrls": [
-  			{
-  				"#type": "require",
-  				"require": "$.descriptionURL",
-  				"value": {
-  					"#type": "require",
-  					"require": "$.[?(@.descriptionURL != '')]",
-  					"value": {
-  						"url": "$.descriptionURL"
-  					}
-  				}
-  			}
-  		],
-      "description": "$.description"
-    },
-    "identifiers": {
-      "#type": "flatten",
-      "values": [
-        {
-          "#type": "for_each",
-          "values": "$.identifiers",
-          "spec": {
-            "namespace": {
+          "header": {
+            "lifecycleStatus": "$.status",
+            "availability": {
+              "type": "general"
+            },
+            "packageProvider": {
+              "#type": "require",
+              "require": "$.[?(@.providerName != '')]",
+              "value": {
+                "name": "$.providerName"
+              }
+            },
+            "packageSource": "GOKb",
+            "packageName": "$.name",
+            "packageSlug": "$.uuid",
+            "sourceDataCreated": "$.dateCreated",
+            "sourceDataUpdated": "$.lastUpdatedDisplay",
+            "sourceTitleCount": "$.titleCount",
+            "availabilityScope": {
+              "#type": "string_to_case",
+              "value": "$.global",
+              "case": "LOWER_SNAKE"
+            },
+            "availabilityConstraints": {
               "#type": "fallback",
               "strategies": [
                 {
                   "#type": "require",
-                  "require": "$.[?(@.type == 'ttl_prv')]",
+                  "require": "$.[?(@.global == 'Regional' || @.global == 'Consortium')]",
                   "value": {
-                    "#type": "string_join",
-                    "delimiter": "_",
-                    "values": [
-                      "ttl_prv",
-                      {
-                        "#type": "fallback",
-                        "strategies": [
-                          {
-                            "#type": "require",
-                            "require": "$.[?(@.namespaceName empty false)]",
-                            "value": {
-                              "#type": "string_to_case",
-                              "case": "LOWER_SNAKE",
-                              "value": "$.namespaceName"
-                            }
-                          },
-                          {
-                            "#type": "require",
-                            "require": "$.[?(@.namespace empty false)]",
-                            "value": {
-                              "#type": "string_to_case",
-                              "case": "LOWER_SNAKE",
-                              "value": "$.namespace"
-                            }
-                          }
-                        ]
-                      }
-                    ]
+                    "#type": "require",
+                    "require": "$.globalNote",
+                    "value": {
+                      "#type": "require",
+                      "require": "$.[?(@.globalNote != '')]",
+                      "value": [
+                        {
+                          "body": "$.globalNote"
+                        }
+                      ]
+                    }
                   }
                 },
                 {
                   "#type": "require",
-                  "require": "$.[?(@.namespaceName empty false)]",
+                  "require": "$.[?(@.global == 'Local')]",
                   "value": {
-                    "#type": "string_to_case",
-                    "case": "LOWER_SNAKE",
-                    "value": "$.namespaceName"
+                    "#type": "for_each",
+                    "values": "$.curatoryGroups[?(@ empty false)]",
+                    "spec": {
+                      "body": "$"
+                    }
                   }
                 },
+                []
+              ]
+            },
+            "contentTypes": {
+              "#type": "require",
+              "require": "$.[?(@.contentType empty false)]",
+              "value": [
                 {
-                  "#type": "require",
-                  "require": "$.[?(@.namespace empty false)]",
-                  "value": {
-                    "#type": "string_to_case",
-                    "case": "LOWER_SNAKE",
-                    "value": "$.namespace"
-                  }
+                  "contentType": "$.contentType"
                 }
               ]
             },
-            "value": "$.value"
-          }
-        },
+            "alternateResourceNames": {
+              "#type": "for_each",
+              "values": "$.altname[?(@ empty false)]",
+              "spec": {
+                "name": "$"
+              }
+            },
+            "alternateSlugs": [
+              {
+                "#type": "require",
+                "require": "$.shortcode",
+                "value": {
+                  "slug": "$.shortcode"
+                }
+              }
+            ],
+            "packageDescriptionUrls": [
+              {
+                "#type": "require",
+                "require": "$.descriptionURL",
+                "value": {
+                  "#type": "require",
+                  "require": "$.[?(@.descriptionURL != '')]",
+                  "value": {
+                    "url": "$.descriptionURL"
+                  }
+                }
+              }
+            ],
+            "description": "$.description"
+          },
+          "identifiers": {
+            "#type": "flatten",
+            "values": [
+              {
+                "#type": "for_each",
+                "values": "$.identifiers",
+                "spec": {
+                  "namespace": {
+                    "#type": "fallback",
+                    "strategies": [
+                      {
+                        "#type": "require",
+                        "require": "$.[?(@.type == 'ttl_prv')]",
+                        "value": {
+                          "#type": "string_join",
+                          "delimiter": "_",
+                          "values": [
+                            "ttl_prv",
+                            {
+                              "#type": "fallback",
+                              "strategies": [
+                                {
+                                  "#type": "require",
+                                  "require": "$.[?(@.namespaceName empty false)]",
+                                  "value": {
+                                    "#type": "string_to_case",
+                                    "case": "LOWER_SNAKE",
+                                    "value": "$.namespaceName"
+                                  }
+                                },
+                                {
+                                  "#type": "require",
+                                  "require": "$.[?(@.namespace empty false)]",
+                                  "value": {
+                                    "#type": "string_to_case",
+                                    "case": "LOWER_SNAKE",
+                                    "value": "$.namespace"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "#type": "require",
+                        "require": "$.[?(@.namespaceName empty false)]",
+                        "value": {
+                          "#type": "string_to_case",
+                          "case": "LOWER_SNAKE",
+                          "value": "$.namespaceName"
+                        }
+                      },
+                      {
+                        "#type": "require",
+                        "require": "$.[?(@.namespace empty false)]",
+                        "value": {
+                          "#type": "string_to_case",
+                          "case": "LOWER_SNAKE",
+                          "value": "$.namespace"
+                        }
+                      }
+                    ]
+                  },
+                  "value": "$.value"
+                }
+              },
+              {
+                "#type": "require",
+                "require": "$.id",
+                "value": {
+                  "namespace": "gokb_id",
+                  "value": {
+                    "#type": "as_string",
+                    "value": "$.id"
+                  }
+                }
+              },
+              {
+                "namespace": "gokb_uuid",
+                "value": "$.uuid"
+              }
+            ]
+          },
+          "packageContents": []
+        }
+      }
+    },
+    "record": {
+      "pushableId": "testId1",
+      "pushKbUrl": "https://google.com",
+      "sessionId": "testId2",
+      "chunkId": "testId3",
+      "records": [
         {
-          "#type": "require",
-          "require": "$.id",
-          "value": {
-            "namespace": "gokb_id",
-            "value": {
-              "#type": "as_string",
-              "value": "$.id"
+          "nominalPlatformUuid": "6b61a81f-ef36-4114-a705-7b802b41e317",
+          "listVerifiedDate": "2020-02-19T08:12:32Z",
+          "lastUpdatedDisplay": "2021-09-03T07:56:54Z",
+          "nominalPlatform": "org.gokb.cred.Platform:106399",
+          "description": null,
+          "listStatus": "Checked",
+          "editStatus": "In Progress",
+          "global": "Local",
+          "providerUuid": "b8760baa-cc1b-4f39-b07d-d19b5bd86ea5",
+          "shortcode": "Springer_Chemistry_and_Materials_Science_eBooks_2008_English/International",
+          "uuid": "a0848165-84f2-4ba8-9698-0dc44dac08e9",
+          "updater": "pkg",
+          "curatoryGroups": [
+            "",
+            "test1"
+          ],
+          "dateCreated": "2019-12-18T09:19:32Z",
+          "provider": "org.gokb.cred.Org:90691",
+          "scope": "Front File",
+          "id": 4728875,
+          "contentType": "Book",
+          "nominalPlatformUrl": "https://link.springer.com",
+          "providerName": "Springer Nature",
+          "nominalPlatformName": "SpringerLink",
+          "componentType": "Package",
+          "identifiers": [
+            {
+              "baseUrl": "https://sigel.staatsbibliothek-berlin.de/suche?isil=",
+              "namespace": "isil",
+              "type": "",
+              "value": "ZDB-2-CMS",
+              "namespaceName": "ISIL"
             }
-          }
-        },
-        {
-          "namespace": "gokb_uuid",
-          "value": "$.uuid"
+          ],
+          "subjects": [],
+          "titleCount": 168,
+          "altname": [],
+          "uri": "https://gokb.org/package/a0848165-84f2-4ba8-9698-0dc44dac08e9",
+          "sortname": "Springer Chemistry and Materials Science eBooks 2008 English/International",
+          "cpname": "Springer Nature",
+          "name": "Springer Chemistry and Materials Science eBooks 2008 English/International",
+          "descriptionURL": "test",
+          "globalNote": "",
+          "status": "Current"
         }
       ]
-    },
-    "packageContents": []
-  }
-  ,
-      "record": {
-              "nominalPlatformUuid": "6b61a81f-ef36-4114-a705-7b802b41e317",
-              "listVerifiedDate": "2020-02-19T08:12:32Z",
-              "lastUpdatedDisplay": "2021-09-03T07:56:54Z",
-              "nominalPlatform": "org.gokb.cred.Platform:106399",
-              "description": null,
-              "listStatus": "Checked",
-              "editStatus": "In Progress",
-              "global": "Local",
-              "providerUuid": "b8760baa-cc1b-4f39-b07d-d19b5bd86ea5",
-              "shortcode": "Springer_Chemistry_and_Materials_Science_eBooks_2008_English/International",
-              "uuid": "a0848165-84f2-4ba8-9698-0dc44dac08e9",
-              "updater": "pkg",
-              "curatoryGroups": ["", "test1"],
-              "dateCreated": "2019-12-18T09:19:32Z",
-              "provider": "org.gokb.cred.Org:90691",
-              "scope": "Front File",
-              "id": 4728875,
-              "contentType": "Book",
-              "nominalPlatformUrl": "https://link.springer.com",
-              "providerName": "Springer Nature",
-              "nominalPlatformName": "SpringerLink",
-              "componentType": "Package",
-              "identifiers": [
-                  {
-                      "baseUrl": "https://sigel.staatsbibliothek-berlin.de/suche?isil=",
-                      "namespace": "isil",
-                      "type": "",
-                      "value": "ZDB-2-CMS",
-                      "namespaceName": "ISIL"
-                  }
-              ],
-              "subjects": [],
-              "titleCount": 168,
-              "altname": [],
-              "uri": "https://gokb.org/package/a0848165-84f2-4ba8-9698-0dc44dac08e9",
-              "sortname": "Springer Chemistry and Materials Science eBooks 2008 English/International",
-              "cpname": "Springer Nature",
-              "name": "Springer Chemistry and Materials Science eBooks 2008 English/International",
-              "descriptionURL": "test",
-              "globalNote": "",
-              "status": "Current"
-          }
+    }
   }
 }
