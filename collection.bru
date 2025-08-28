@@ -9,7 +9,7 @@ auth {
 
 auth:oauth2 {
   grant_type: client_credentials
-  access_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
+  access_token_url: {{KeycloakURL}}/realms/{{KeycloakRealm}}/protocol/openid-connect/token
   refresh_token_url: {{KeycloakURL}}/realms/PushKB/protocol/openid-connect/token
   client_id: {{KeycloakClientId}}
   client_secret: {{KeycloakClientSecret}}
@@ -38,6 +38,10 @@ script:pre-request {
   bru.setEnvVar("KeycloakClientId", "apiClient")
   
   // This is not meant to be a secure user password so I don't mind it being here
+  // bru.setEnvVar("KeycloakUser", "superuser");
+  // bru.setEnvVar("KeycloakUserPassword", "superuser");
+  
+  // FIXME this needs to come from envs and only set if not present
   bru.setEnvVar("KeycloakUser", "superuser");
   bru.setEnvVar("KeycloakUserPassword", "superuser");
 }
