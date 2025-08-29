@@ -1,0 +1,11 @@
+meta {
+  name: PUT reset GokbSource pointer
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{PushKBURL}}/sources/gokbsource/35956c55-6aa1-539a-8c45-27000c4853c5/resetPointer
+  body: json
+  auth: inherit
+}
