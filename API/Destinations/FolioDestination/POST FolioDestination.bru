@@ -11,20 +11,42 @@ post {
 }
 
 body:json {
+  // {
+  //     "destinationType": "PACKAGE",
+  //     //"destinationType": "PCI",
+  //     //"destinationType": "WIBBLE",
+  //     "folioTenant": {
+  //         "baseUrl": "https://testing.com",
+  //         "loginUser": "testuser",
+  //         "loginPassword": "testpass",
+  //         "tenant": "test1",
+  //         "authType": "OKAPI",
+  //         "name": "test-tenant"
+  //     },
+  //     "name": "Test FOLIO Destination API"
+  //     //"name": "API test TIPP"
+  // }
+  
+  
+  // {
+  //     "destinationType": "PACKAGE",
+  //     "folioTenant": {
+  //         "baseUrl": "http://localhost:8080",
+  //         "tenant": "test1",
+  //         "authType": "NONE",
+  //         "name": "Local DC FOLIO"
+  //     },
+  //     "name": "Local DC FOLIO Package"
+  // }
+  
   {
-      "destinationType": "PACKAGE",
-      //"destinationType": "PCI",
-      //"destinationType": "WIBBLE",
+      "destinationType": "PCI",
       "folioTenant": {
-          "id": "e0aecbc2-a11d-58d3-a88b-e368878052a6",
-          "baseUrl": "https://testing.com",
-          "loginUser": "testuser",
-          "loginPassword": "testpass",
+          "baseUrl": "http://localhost:8080",
           "tenant": "test1",
-          "authType": "OKAPI",
-          "name": "test-tenant"
+          "authType": "NONE",
+          "name": "Local DC FOLIO"
       },
-      "name": "Test FOLIO Destination API"
-      //"name": "API test TIPP"
+      "name": "Local DC FOLIO Title"
   }
 }

@@ -1,0 +1,15 @@
+meta {
+  name: GET DutyCycleTasks
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{PushKBURL}}/dutycycletasks
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

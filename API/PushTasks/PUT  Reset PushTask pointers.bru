@@ -1,0 +1,11 @@
+meta {
+  name: PUT  Reset PushTask pointers
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{PushKBURL}}/pushtasks/e3a02ea1-3fbe-53f5-b654-13c8cb430e68/resetPointers
+  body: none
+  auth: inherit
+}
